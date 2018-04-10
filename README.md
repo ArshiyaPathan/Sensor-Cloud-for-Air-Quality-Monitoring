@@ -1,0 +1,2 @@
+# Senoser-Cloud-for-Air-Qulaiy-Monitoring
+This project aims at developing clean city edge cloud engine for a region to allow people to discover, access and learn air quality. The goal of the project is to build a web application which provides users a map-based user interface. People can discover various node stations in a map. People can get station-based data statistics based on selected time range (daily/weekly/monthly/yearly).
