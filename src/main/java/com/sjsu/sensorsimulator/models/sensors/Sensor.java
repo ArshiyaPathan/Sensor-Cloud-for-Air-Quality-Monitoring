@@ -16,7 +16,7 @@ public class Sensor {
     private SensorType sensorType;
 
     //(cascade=CascadeType.ALL)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "station_id")
     private Station station;
 

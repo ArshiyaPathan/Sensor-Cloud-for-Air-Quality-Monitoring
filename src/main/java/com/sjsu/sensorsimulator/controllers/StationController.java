@@ -30,7 +30,7 @@ public class StationController {
 
 
     //get station info
-    @RequestMapping(value = "/{id}/")
+    @RequestMapping(value = "/{id}")
     public ResponseEntity<Station> getStationInfo(@PathVariable String id){
 
         Station station = stationDataProvider.getStation(id);
@@ -62,21 +62,22 @@ public class StationController {
         return "Deleted";
     }*/
 
-    @RequestMapping(value = "/{id}/sensors/{sensorid}/", method = RequestMethod.DELETE)
-    public String deleteSensor(@PathVariable String id, @PathVariable String sensorid){
+    ////delete sensor from station -- not working
+    @RequestMapping(value = "/{id}/sensors/{sensorid}", method = RequestMethod.DELETE)
+    public String deleteSensorFromStation(@PathVariable String id, @PathVariable String sensorid){
         stationDataProvider.deleteSensorByID(sensorid);
         return "Deleted";
     }
 
     //delete station --working
-    @RequestMapping(value = "/{id}/", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteStation(@PathVariable String id){
         stationDataProvider.deleteStation(id);
         return "Deleted";
     }
 
     //update station-- working
-    @RequestMapping(value = "/{id}/sensors/{sensorid}/", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}/sensors/{sensorid}", method = RequestMethod.PUT)
     public String updateStation(@PathVariable String id, @PathVariable String sensorid){
         stationDataProvider.updateStation(id,sensorid);
         return "updated";

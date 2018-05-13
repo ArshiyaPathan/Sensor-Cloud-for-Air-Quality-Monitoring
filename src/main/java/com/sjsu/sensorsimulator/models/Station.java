@@ -17,7 +17,7 @@ public class Station {
     private String latitude;
     private String longitude;
 
-    @OneToMany(targetEntity = Sensor.class, mappedBy = "station", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+    @OneToMany(targetEntity = Sensor.class, mappedBy = "station", fetch = FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval = true)
     private List<Sensor> sensors = new ArrayList<>();
 
     public void setLatitude(String latitude) {

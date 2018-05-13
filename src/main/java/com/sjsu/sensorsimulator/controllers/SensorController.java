@@ -15,17 +15,13 @@ import java.util.List;
 public class SensorController {
 
     @Autowired
-    final StationDataProvider stationDataProvider;
+    StationDataProvider stationDataProvider;
 
-    @Autowired
-    public SensorController(StationDataProvider stationDataProvider) {
-        this.stationDataProvider = stationDataProvider;
-    }
-
-   /* @Autowired
-    public SensorController(StationDataProvider stationDataProvider) {
-        this.stationDataProvider = stationDataProvider;
-    }*/
+//    @Autowired
+//    public SensorController(StationDataProvider stationDataProvider) {
+//        this.stationDataProvider = stationDataProvider;
+//    }
+//
 
    //view sensors  -- working
     @RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -34,14 +30,14 @@ public class SensorController {
     }
 
     //update sensor by id --working--- modify
-    @RequestMapping(value ="/{id}/", method = RequestMethod.PUT)
+    @RequestMapping(value ="/{id}", method = RequestMethod.PUT)
     public String updateSensor(@PathVariable String id){
         stationDataProvider.updateSensor(id);
         return "sensor updated";
     }
 
     //get sensor by id -- working
-    @RequestMapping(value ="/{id}/", method = RequestMethod.GET)
+    @RequestMapping(value ="/{id}", method = RequestMethod.GET)
     public ResponseEntity<Sensor> getSensorbyID(@PathVariable String id){
 
         Sensor sensor = stationDataProvider.getSensorById(id);
@@ -52,8 +48,8 @@ public class SensorController {
     }
 
     //working but station is also removed
-    @RequestMapping(value= "/{id}/",method = RequestMethod.DELETE)
-    public String deleteSensor(@PathVariable String id){
+    @RequestMapping(value= "/{id}",method = RequestMethod.DELETE)
+    public String deleteSensorByID(@PathVariable String id){
         stationDataProvider.deleteSensorByID(id);
         return "Sensor deleted";
     }
