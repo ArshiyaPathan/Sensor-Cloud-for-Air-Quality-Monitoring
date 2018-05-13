@@ -13,10 +13,29 @@ public class Station {
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String stationId;
+    private String stationName;
+    private String latitude;
+    private String longitude;
 
     @OneToMany(targetEntity = Sensor.class, mappedBy = "station", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private List<Sensor> sensors = new ArrayList<>();
-    private String stationName;
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
 
     public String getStationId() {
         return stationId;

@@ -17,7 +17,7 @@ public class StationController {
     @Autowired
     StationDataProvider stationDataProvider;
 
-
+    //get all stations
     @RequestMapping(value = "/all")
     public ResponseEntity<List> getAllStations() {
         return ResponseEntity.ok(stationDataProvider.getStations());
@@ -28,6 +28,8 @@ public class StationController {
         return ResponseEntity.ok(stationDataProvider.getStations().size());
     }
 
+
+    //get station info
     @RequestMapping(value = "/{id}/")
     public ResponseEntity<Station> getStationInfo(@PathVariable String id){
 
@@ -39,10 +41,45 @@ public class StationController {
         }
     }
 
+    //add sensor-- working now
     @RequestMapping(value = "/{id}/sensors", method = RequestMethod.POST)
     public String addSensor(@PathVariable String id, @RequestBody AddSensorRequest sensorRequest){
         stationDataProvider.addSensorToStation(id, sensorRequest);
         return "accepted";
+    }
+
+    //add station--working
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    public String addStation(@RequestBody Station stationRequest){
+        stationDataProvider.addStation(stationRequest);
+        return "accepted";
+    }
+
+    //delete sensor from station -- not working
+    /*@RequestMapping(value = "/{id}/sensors/{sensorid}/", method = RequestMethod.DELETE)
+    public String deleteSensor(@PathVariable String id, @PathVariable String sensorid){
+        stationDataProvider.deleteSensorFromStation(id,sensorid);
+        return "Deleted";
+    }*/
+
+    @RequestMapping(value = "/{id}/sensors/{sensorid}/", method = RequestMethod.DELETE)
+    public String deleteSensor(@PathVariable String id, @PathVariable String sensorid){
+        stationDataProvider.deleteSensorByID(sensorid);
+        return "Deleted";
+    }
+
+    //delete station --working
+    @RequestMapping(value = "/{id}/", method = RequestMethod.DELETE)
+    public String deleteStation(@PathVariable String id){
+        stationDataProvider.deleteStation(id);
+        return "Deleted";
+    }
+
+    //update station-- working
+    @RequestMapping(value = "/{id}/sensors/{sensorid}/", method = RequestMethod.PUT)
+    public String updateStation(@PathVariable String id, @PathVariable String sensorid){
+        stationDataProvider.updateStation(id,sensorid);
+        return "updated";
     }
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)

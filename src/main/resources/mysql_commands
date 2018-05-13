@@ -1,2 +1,1 @@
-create database sensor_simulator
-grant all on sensor_simulator.* to 'springuser'@'localhost'
+grant all on stationcloud.* to 'springuser'@'localhost'

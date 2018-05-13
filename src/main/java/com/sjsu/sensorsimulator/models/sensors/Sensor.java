@@ -15,8 +15,9 @@ public class Sensor {
     private String name;
     private SensorType sensorType;
 
-    @ManyToOne(cascade=CascadeType.ALL)
-    @JoinColumn(name = "stationId")
+    //(cascade=CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "station_id")
     private Station station;
 
     public Sensor(){
@@ -24,6 +25,7 @@ public class Sensor {
     }
 
     public Sensor(String name, SensorType sensorType, Station station) {
+        //this.sensorId = ";
         this.name = name;
         this.sensorType = sensorType;
         this.station = station;
