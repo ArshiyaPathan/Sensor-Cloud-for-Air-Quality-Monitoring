@@ -508,7 +508,9 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: hostname+"stations",
-            data: formData,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType : "application/json",
             success: function (msg) {
                 $("#thanks").html(msg)
 
@@ -531,7 +533,9 @@ $(document).ready(function () {
         $.ajax({
             type: "POST",
             url: hostname+"stations/" + stationID + "/sensors",
-            data: formData,
+            data: JSON.stringify(formData),
+            dataType: "json",
+            contentType : "application/json",
             success: function (msg) {
 
 
