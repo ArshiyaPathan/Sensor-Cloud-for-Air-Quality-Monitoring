@@ -530,7 +530,7 @@ $(document).ready(function () {
         };
         $.ajax({
             type: "POST",
-            url: hostname+"stations/" + stationID + "/sensors/",
+            url: hostname+"stations/" + stationID + "/sensors",
             data: formData,
             success: function (msg) {
 
