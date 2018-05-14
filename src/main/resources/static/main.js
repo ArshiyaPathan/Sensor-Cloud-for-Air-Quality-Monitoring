@@ -216,7 +216,7 @@ $(document).ready(function () {
         var baseURl = hostname
         $.ajax({
             //url: baseURl + "table" + urlPart,
-            url: hostname+"data/data.json",
+            url: hostname+"data.json",
 
             dataType: 'json',
             success: function (data) {
@@ -233,7 +233,7 @@ $(document).ready(function () {
         //Fetch the table graphvalues
         $.ajax({
             //url: baseURl + "graph" + urlPart,
-            url: hostname+"data/polution.json",
+            url: hostname+"polution.json",
             dataType: 'json',
             success: function (data) {
                 //alert('done');
