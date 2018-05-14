@@ -512,11 +512,9 @@ $(document).ready(function () {
             dataType: "json",
             contentType : "application/json",
             success: function (msg) {
-                $("#thanks").html(msg)
-
-            },
+                },
             error: function () {
-                alert("failure");
+ 
             }
         });
 
