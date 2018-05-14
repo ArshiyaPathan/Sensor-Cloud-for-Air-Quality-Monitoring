@@ -417,7 +417,7 @@ $(document).ready(function () {
             var data = station.row($(this).parents('tr')).data();
             $.ajax({
                 // url: 'http://127.0.0.1:8081/station/' + data[0],
-                url: hostname+'stations/' + data[0] + "/",
+                url: hostname+'stations/' + data[0] ,
 
                 type: 'DELETE',
                 success: function (result) {
@@ -448,7 +448,7 @@ $(document).ready(function () {
 
                 "ajax": {
                     //"url": "http://127.0.0.1:8081/data/station1.json",
-                    "url": hostname+"stations/" + stationId + "/",
+                    "url": hostname+"stations/" + stationId ,
 
                     "dataSrc": function (json) {
                         var result = [];
@@ -480,7 +480,7 @@ $(document).ready(function () {
             $('#sensorTable tbody').on('click', 'button', function () {
                 var data = sensor.row($(this).parents('tr')).data();
                 $.ajax({
-                    url: hostname+'stations/' + data[0] + "/sensor/" + data[2] + "/",
+                    url: hostname+'stations/' + data[0] + "/sensor/" + data[2]  ,
                     // url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
                     type: 'DELETE',
                     success: function (result) {
