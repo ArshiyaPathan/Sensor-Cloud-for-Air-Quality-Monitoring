@@ -103,7 +103,7 @@ $(document).ready(function () {
         }
         var map = new google.maps.Map(mapCanvas, mapOptions);
         var image = {
-            url: 'imgs/marker.png',
+            url: 'marker.png',
             // This marker is 20 pixels wide by 32 pixels high.
             size: new google.maps.Size(50, 50),
             // The origin for this image is (0, 0).
@@ -118,7 +118,7 @@ $(document).ready(function () {
             coords: [1, 1, 1, 20, 18, 20, 18, 1],
             type: 'poly'
         };
-        var markerImage = 'imgs/marker.png';
+        var markerImage = 'marker.png';
         for (i in result) {
             var station = result[i];
 
