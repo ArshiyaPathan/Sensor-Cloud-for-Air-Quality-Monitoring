@@ -416,7 +416,7 @@ $(document).ready(function () {
         $('#stationTable tbody').on('click', '.btn-delete', function (e) {
             var data = station.row($(this).parents('tr')).data();
             $.ajax({
-                // url: 'http://127.0.0.1:8081/station/' + data[0],
+                 //url: 'http://127.0.0.1:8081/station/' + data[0],
                 url: hostname+'stations/' + data[0] ,
 
                 type: 'DELETE',
@@ -485,9 +485,11 @@ $(document).ready(function () {
                     type: 'DELETE',
                     success: function (result) {
                          loadSensorTable(stationId);
-                          $("#sensorTable").fadeOut(100);
 
-                    }
+                    },
+            error: function () {
+                  loadSensorTable(stationId);
+            }
 
 
                 });
@@ -514,11 +516,12 @@ $(document).ready(function () {
             dataType: "json",
             contentType : "application/json",
             success: function (msg) {
-                loadStationTable();
-
+                  loadStationTable();
+                     $("#sensorTable").fadeOut(100);
                 },
             error: function () {
- 
+                  loadStationTable();
+                     $("#sensorTable").fadeOut(100);
             }
         });
 
@@ -539,13 +542,11 @@ $(document).ready(function () {
             dataType: "json",
             contentType : "application/json",
             success: function (msg) {
-              loadStationTable();
-             $("#sensorTable").fadeOut(100);
-              
+                        $("#sensorTable").fadeOut(100);
 
             },
             error: function () {
-
+                        $("#sensorTable").fadeOut(100);
             }
         });
     });
