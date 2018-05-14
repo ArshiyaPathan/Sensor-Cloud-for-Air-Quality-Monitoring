@@ -379,7 +379,7 @@ $(document).ready(function () {
             destroy: true,
             "ajax": {
                 "url": hostname+"stations/all",
-                // "url" : "http://127.0.0.1:8081/data/table.json",
+                //"url" : "http://127.0.0.1:8081/data/table.json",
                 "dataSrc": function (json) {
                     var result = [];
                     for (row in json) {
@@ -485,6 +485,7 @@ $(document).ready(function () {
                     type: 'DELETE',
                     success: function (result) {
                          loadSensorTable(stationId);
+                          $("#sensorTable").fadeOut(100);
 
                     }
 
@@ -513,6 +514,8 @@ $(document).ready(function () {
             dataType: "json",
             contentType : "application/json",
             success: function (msg) {
+                loadStationTable();
+
                 },
             error: function () {
  
@@ -536,7 +539,9 @@ $(document).ready(function () {
             dataType: "json",
             contentType : "application/json",
             success: function (msg) {
-
+              loadStationTable();
+             $("#sensorTable").fadeOut(100);
+              
 
             },
             error: function () {
