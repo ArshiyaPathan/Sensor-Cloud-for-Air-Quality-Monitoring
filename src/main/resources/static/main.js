@@ -1,5 +1,5 @@
 $(document).ready(function () {
-     var hostname = window.location.protocol + "//" + window.location.host + "/"
+    var hostname = window.location.protocol + "//" + window.location.host + "/"
     // when page is loaded, remove the loading
     $('.loading').remove();
 
@@ -51,7 +51,7 @@ $(document).ready(function () {
     function initMap() {
         $.ajax({
             // url: 'http://127.0.0.1:8081/data/station.json',
-            url: hostname+'stations/all',
+            url: hostname + 'stations/all',
             dataType: 'json',
             success: function (data) {
                 getMapData(data);
@@ -216,7 +216,7 @@ $(document).ready(function () {
         var baseURl = hostname
         $.ajax({
             //url: baseURl + "table" + urlPart,
-            url: hostname+"data.json",
+            url: hostname + "data.json",
 
             dataType: 'json',
             success: function (data) {
@@ -233,7 +233,7 @@ $(document).ready(function () {
         //Fetch the table graphvalues
         $.ajax({
             //url: baseURl + "graph" + urlPart,
-            url: hostname+"polution.json",
+            url: hostname + "polution.json",
             dataType: 'json',
             success: function (data) {
                 //alert('done');
@@ -378,8 +378,8 @@ $(document).ready(function () {
         station = $('#stationTable').DataTable({
             destroy: true,
             "ajax": {
-                "url": hostname+"stations/all",
-                //"url" : "http://127.0.0.1:8081/data/table.json",
+                "url": hostname + "stations/all",
+                //"url": "http://127.0.0.1:8081/data/table.json",
                 "dataSrc": function (json) {
                     var result = [];
                     for (row in json) {
@@ -416,18 +416,17 @@ $(document).ready(function () {
         $('#stationTable tbody').on('click', '.btn-delete', function (e) {
             var data = station.row($(this).parents('tr')).data();
             $.ajax({
-                 //url: 'http://127.0.0.1:8081/station/' + data[0],
-                url: hostname+'stations/' + data[0] ,
+               // url: 'http://127.0.0.1:8081/station/' + data[0],
+                url: hostname + 'stations/' + data[0],
 
                 type: 'DELETE',
                 success: function (result) {
-                   loadStationTable();
+                    clearAndRedrawStationTable();
+
+                    loadSensorTable(data[0]);
                 }
+
             });
-
-
-            loadSensorTable(data[0]);
-            $("#sensorTable").delay(100).fadeIn(100);
 
 
         });
@@ -448,7 +447,7 @@ $(document).ready(function () {
 
                 "ajax": {
                     //"url": "http://127.0.0.1:8081/data/station1.json",
-                    "url": hostname+"stations/" + stationId ,
+                    "url": hostname + "stations/" + stationId,
 
                     "dataSrc": function (json) {
                         var result = [];
@@ -480,21 +479,20 @@ $(document).ready(function () {
             $('#sensorTable tbody').on('click', 'button', function () {
                 var data = sensor.row($(this).parents('tr')).data();
                 $.ajax({
-                    url: hostname+'stations/' + data[0] + "/sensors/" + data[2],
-                    // url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
+                    url: hostname + 'stations/' + data[0] + "/sensors/" + data[2],
+                    //url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
                     type: 'DELETE',
                     success: function (result) {
-                         loadSensorTable(stationId);
+                        clearAndRedrawSensorTable(stationId);
 
                     },
-            error: function () {
-                  loadSensorTable(stationId);
-            }
+                    error: function () {
+                        clearAndRedrawSensorTable(stationId);
+                    }
 
 
                 });
-                refreshTables();
-                $("#sensorTable").fadeOut(100);
+ 
 
             })
         });
@@ -511,17 +509,17 @@ $(document).ready(function () {
         };
         $.ajax({
             type: "POST",
-            url: hostname+"stations",
+            url: hostname + "stations",
             data: JSON.stringify(formData),
             dataType: "json",
-            contentType : "application/json",
+            contentType: "application/json",
             success: function (msg) {
-                  loadStationTable();
-                     $("#sensorTable").fadeOut(100);
-                },
+                clearAndRedrawStationTable();
+                $("#sensorTable").fadeOut(100);
+            },
             error: function () {
-                  loadStationTable();
-                     $("#sensorTable").fadeOut(100);
+                clearAndRedrawStationTable();
+                $("#sensorTable").fadeOut(100);
             }
         });
 
@@ -537,19 +535,99 @@ $(document).ready(function () {
         };
         $.ajax({
             type: "POST",
-            url: hostname+"stations/" + stationID + "/sensors",
+            url: hostname + "stations/" + stationID + "/sensors",
             data: JSON.stringify(formData),
             dataType: "json",
-            contentType : "application/json",
+            contentType: "application/json",
             success: function (msg) {
-                        $("#sensorTable").fadeOut(100);
+                $("#sensorTable").fadeOut(100);
 
             },
             error: function () {
-                        $("#sensorTable").fadeOut(100);
+                $("#sensorTable").fadeOut(100);
             }
         });
     });
+
+    function clearAndRedrawStationTable() {
+        var stationDataTable = $("#stationTable").dataTable();
+
+        $.ajax({
+            "url": hostname + "stations/all",
+            //"url": "http://127.0.0.1:8081/data/table.json",
+            dataType: 'json',
+            success: function (data) {
+
+                stationDataTable.fnClearTable();
+                stationDataTable.fnAddData(loadStationTableData(data));
+                stationDataTable.fnDraw();
+
+            },
+            error: function (e) {
+
+                console.log(e.responseText);
+            }
+        });
+
+
+    }
+
+    function loadStationTableData(json) {
+
+        var result = [];
+        for (row in json) {
+            var rowResult = [json[row].stationId, json[row].stationName];
+            result.push(rowResult);
+
+        }
+
+        var final = { "data": result };
+        return final.data
+
+    }
+
+
+
+    function clearAndRedrawSensorTable(stationId) {
+        var sensorDataTable = $("#sensorTable").dataTable();
+        $.ajax({
+            //"url": "http://127.0.0.1:8081/data/station1.json",
+            "url": hostname + "stations/" + stationId ,
+            dataType: 'json',
+            success: function (data) {
+
+                sensorDataTable.fnClearTable();
+                sensorDataTable.fnAddData(loadSensorTableData(data));
+                sensorDataTable.fnDraw();
+
+            },
+            error: function (e) {
+
+                console.log(e.responseText);
+            }
+        });
+
+
+    }
+
+    function loadSensorTableData(json) {
+
+        var result = [];
+        var stationId = json.stationId;
+        var stationName = json.stationName;
+        for (row in json.sensors) {
+            var status = "Not Active"
+            if (json.sensors[row].status == true) {
+                status = "Active"
+            }
+            var rowResult = [stationId, stationName, json.sensors[row].sensorId, json.sensors[row].sensorType, status];
+            result.push(rowResult);
+
+        }
+
+        var final = { "data": result };
+        return final.data
+    }
 
 
 });
