@@ -421,7 +421,7 @@ $(document).ready(function () {
 
                 type: 'DELETE',
                 success: function (result) {
-                    // Do something with the result
+                   loadStationTable();
                 }
             });
 
@@ -484,6 +484,7 @@ $(document).ready(function () {
                     // url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
                     type: 'DELETE',
                     success: function (result) {
+                         loadStationTable();
 
                     }
 
