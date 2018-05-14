@@ -501,9 +501,7 @@ $(document).ready(function () {
         e.preventDefault();
         e.stopPropagation();
         var formData = {
-            'stationId': $('input[name=stationId]').val(),
             'stationName': $('input[name=stationName]').val(),
-            'city': $('input[name=city]').val(),
             'longitude': $('input[name=longitude]').val(),
             'latitude': $('input[name=latitude]').val()
         };
