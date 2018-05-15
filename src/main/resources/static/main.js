@@ -50,7 +50,7 @@ $(document).ready(function () {
 
     function initMap() {
         $.ajax({
-            // url: 'http://127.0.0.1:8081/data/station.json',
+            //url: 'http://127.0.0.1:8081/data/station.json',
             url: hostname + 'stations/all',
             dataType: 'json',
             success: function (data) {
@@ -392,8 +392,7 @@ $(document).ready(function () {
                     return final.data
                 }
             },
-            // "ajax": "http://127.0.0.1:8081/"+$("#adminCityselector").val()+"/"+"station",
-            "columnDefs": [{
+             "columnDefs": [{
                 "targets": -1,
                 "data": null,
                 "defaultContent":
@@ -416,15 +415,15 @@ $(document).ready(function () {
         $('#stationTable tbody').on('click', '.btn-delete', function (e) {
             var data = station.row($(this).parents('tr')).data();
             $.ajax({
-               // url: 'http://127.0.0.1:8081/station/' + data[0],
+                //url: 'http://127.0.0.1:8081/station/' + data[0],
                 url: hostname + 'stations/' + data[0],
 
                 type: 'DELETE',
                 success: function (result) {
                     clearAndRedrawStationTable();
 
-                    loadSensorTable(data[0]);
-                }
+
+                 }
 
             });
 
@@ -440,8 +439,10 @@ $(document).ready(function () {
 
     //Sensor table
     function loadSensorTable(stationId) {
+
         $("#sensorTable").delay(100).fadeIn(100);
-        $(document).ready(function () {
+         var sensorTable=  $("#sensorTable").dataTable();
+         $(document).ready(function () {
             sensor = $('#sensorTable').DataTable({
                 destroy: true,
 
@@ -476,19 +477,18 @@ $(document).ready(function () {
                 ]
             });
 
-            $('#sensorTable tbody').on('click', 'button', function () {
+            $('#sensorTable tbody').off( 'click' ).on('click', 'button', function () {
                 var data = sensor.row($(this).parents('tr')).data();
                 $.ajax({
                     url: hostname + 'stations/' + data[0] + "/sensors/" + data[2],
-                    //url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
+                   //url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
                     type: 'DELETE',
                     success: function (result) {
                         clearAndRedrawSensorTable(stationId);
 
                     },
                     error: function () {
-                        clearAndRedrawSensorTable(stationId);
-                    }
+                          }
 
 
                 });
@@ -515,11 +515,11 @@ $(document).ready(function () {
             contentType: "application/json",
             success: function (msg) {
                 clearAndRedrawStationTable();
-                $("#sensorTable").fadeOut(100);
+                  $("#sensorTable").dataTable().fnClearTable();
             },
             error: function () {
                 clearAndRedrawStationTable();
-                $("#sensorTable").fadeOut(100);
+                   $("#sensorTable").dataTable().fnClearTable();
             }
         });
 
@@ -540,11 +540,11 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json",
             success: function (msg) {
-                $("#sensorTable").fadeOut(100);
+            $("#sensorTable").dataTable().fnClearTable();
 
             },
             error: function () {
-                $("#sensorTable").fadeOut(100);
+                 $("#sensorTable").dataTable().fnClearTable();
             }
         });
     });
