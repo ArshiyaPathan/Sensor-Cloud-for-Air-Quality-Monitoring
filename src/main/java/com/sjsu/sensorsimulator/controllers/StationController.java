@@ -41,42 +41,34 @@ public class StationController {
         }
     }
 
-    //add sensor-- working now
     @RequestMapping(value = "/{id}/sensors", method = RequestMethod.POST)
     public String addSensor(@PathVariable String id, @RequestBody AddSensorRequest sensorRequest){
         stationDataProvider.addSensorToStation(id, sensorRequest);
         return "accepted";
     }
 
-    //add station--working
+    //add station
     @RequestMapping(value = "", method = RequestMethod.POST)
     public String addStation(@RequestBody Station stationRequest){
         stationDataProvider.addStation(stationRequest);
         return "accepted";
     }
 
-    //delete sensor from station -- not working
-    /*@RequestMapping(value = "/{id}/sensors/{sensorid}/", method = RequestMethod.DELETE)
-    public String deleteSensor(@PathVariable String id, @PathVariable String sensorid){
-        stationDataProvider.deleteSensorFromStation(id,sensorid);
-        return "Deleted";
-    }*/
-
-    ////delete sensor from station -- not working
+    //delete sensor from station
     @RequestMapping(value = "/{id}/sensors/{sensorid}", method = RequestMethod.DELETE)
     public String deleteSensorFromStation(@PathVariable String id, @PathVariable String sensorid){
         stationDataProvider.deleteSensorByID(sensorid);
         return "Deleted";
     }
 
-    //delete station --working
+    //delete station
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteStation(@PathVariable String id){
         stationDataProvider.deleteStation(id);
         return "Deleted";
     }
 
-    //update station-- working
+    //update station
     @RequestMapping(value = "/{id}/sensors/{sensorid}", method = RequestMethod.PUT)
     public String updateStation(@PathVariable String id, @PathVariable String sensorid){
         stationDataProvider.updateStation(id,sensorid);

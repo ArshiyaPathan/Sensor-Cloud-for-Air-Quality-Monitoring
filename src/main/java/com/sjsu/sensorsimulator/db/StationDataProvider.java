@@ -37,17 +37,14 @@ public class StationDataProvider {
         return station.orElse(null);
     }
 
-    //get list of sensors--old
+    //get list of sensors
     public List<Sensor> getSensors(){
         return (List<Sensor>) sensorRepository.findAll();
     }
 
-    //get one sensor--new
+    //get one sensor
     public Sensor getSensorById(String id) {
         Optional<Sensor> sensor = sensorRepository.findById(id);
-        //if (sensor == null) {
-        //throw new ResourceNotFoundException(id, "user not found");
-        //}
         return sensor.orElse(null);
     }
 
@@ -86,7 +83,6 @@ public class StationDataProvider {
     //delete station
     public void deleteStation(String id){
         stationRepository.delete(getStation(id));
-        // stationRepository.deleteById();
     }
 
     //update station by changing sensor status
@@ -124,7 +120,6 @@ public class StationDataProvider {
     }
 
     public void addSensorDataValues(SensorData dataReq){
-        //Station station= new Station();
         sensorDataRepository.save(dataReq);
     }
 

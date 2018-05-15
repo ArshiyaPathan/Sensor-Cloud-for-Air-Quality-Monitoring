@@ -17,26 +17,20 @@ public class SensorController {
     @Autowired
     StationDataProvider stationDataProvider;
 
-//    @Autowired
-//    public SensorController(StationDataProvider stationDataProvider) {
-//        this.stationDataProvider = stationDataProvider;
-//    }
-//
-
-   //view sensors  -- working
+   //view sensors
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Sensor> getAllSensors(){
         return  stationDataProvider.getSensors();
     }
 
-    //update sensor by id --working--- modify
+    //update sensor by id
     @RequestMapping(value ="/{id}", method = RequestMethod.PUT)
     public String updateSensor(@PathVariable String id){
         stationDataProvider.updateSensor(id);
         return "sensor updated";
     }
 
-    //get sensor by id -- working
+    //get sensor by id
     @RequestMapping(value ="/{id}", method = RequestMethod.GET)
     public ResponseEntity<Sensor> getSensorbyID(@PathVariable String id){
 
@@ -47,7 +41,6 @@ public class SensorController {
             return ResponseEntity.ok(sensor);
     }
 
-    //working but station is also removed
     @RequestMapping(value= "/{id}",method = RequestMethod.DELETE)
     public String deleteSensorByID(@PathVariable String id){
         stationDataProvider.deleteSensorByID(id);
