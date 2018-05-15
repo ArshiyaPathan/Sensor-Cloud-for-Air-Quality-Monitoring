@@ -368,6 +368,7 @@ $(document).ready(function () {
     };
 
     function loadStationTable() {
+
         $("#stationTable").delay(100).fadeIn(100);
 
         var station;
@@ -392,7 +393,7 @@ $(document).ready(function () {
                     return final.data
                 }
             },
-             "columnDefs": [{
+            "columnDefs": [{
                 "targets": -1,
                 "data": null,
                 "defaultContent":
@@ -404,7 +405,7 @@ $(document).ready(function () {
         });
 
         // Handle click on "View" button
-        $('#stationTable tbody').on('click', '.btn-view', function (e) {
+        $('#stationTable tbody').off('click',  '.btn-view').on('click', '.btn-view', function (e) {
             var data = station.row($(this).parents('tr')).data();
             loadSensorTable(data[0]);
 
@@ -412,7 +413,7 @@ $(document).ready(function () {
 
 
         // Handle click on "Delete" button
-        $('#stationTable tbody').on('click', '.btn-delete', function (e) {
+        $('#stationTable tbody').off('click', '.btn-delete').on('click', '.btn-delete', function (e) {
             var data = station.row($(this).parents('tr')).data();
             $.ajax({
                 //url: 'http://127.0.0.1:8081/station/' + data[0],
@@ -420,10 +421,15 @@ $(document).ready(function () {
 
                 type: 'DELETE',
                 success: function (result) {
+                    var table = $('#stationTable').DataTable();
+                    if (table) {
+                        table.destroy();
+
+                    }
                     loadStationTable();
 
 
-                 }
+                }
 
             });
 
@@ -441,14 +447,14 @@ $(document).ready(function () {
     function loadSensorTable(stationId) {
 
         $("#sensorTable").delay(100).fadeIn(100);
-         var sensorTable=  $("#sensorTable").dataTable();
-         $(document).ready(function () {
+        var sensorTable = $("#sensorTable").dataTable();
+        $(document).ready(function () {
             sensor = $('#sensorTable').DataTable({
                 destroy: true,
 
                 "ajax": {
                     //"url": "http://127.0.0.1:8081/data/station1.json",
-                    "url": hostname + "stations/" + stationId,
+                     "url": hostname + "stations/" + stationId,
 
                     "dataSrc": function (json) {
                         var result = [];
@@ -477,22 +483,22 @@ $(document).ready(function () {
                 ]
             });
 
-            $('#sensorTable tbody').off( 'click' ).on('click', 'button', function () {
+            $('#sensorTable tbody').off('click').on('click', 'button', function () {
                 var data = sensor.row($(this).parents('tr')).data();
                 $.ajax({
                     url: hostname + 'stations/' + data[0] + "/sensors/" + data[2],
-                   //url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
+                    //url: 'http://127.0.0.1:8081/station/' + data[0] + "/sensor/" + data[2],
                     type: 'DELETE',
                     success: function (result) {
                         clearAndRedrawSensorTable(stationId);
 
                     },
                     error: function () {
-                          }
+                    }
 
 
                 });
- 
+
 
             })
         });
@@ -514,12 +520,22 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json",
             success: function (msg) {
+                var table = $('#stationTable').DataTable();
+                if (table) {
+                    table.destroy();
+
+                }
                 loadStationTable();
-                  $("#sensorTable").dataTable().fnClearTable();
+                $("#sensorTable").dataTable().fnClearTable();
             },
             error: function () {
+                var table = $('#stationTable').DataTable();
+                if (table) {
+                    table.destroy();
+
+                }
                 loadStationTable();
-                   $("#sensorTable").dataTable().fnClearTable();
+                $("#sensorTable").dataTable().fnClearTable();
             }
         });
 
@@ -540,11 +556,11 @@ $(document).ready(function () {
             dataType: "json",
             contentType: "application/json",
             success: function (msg) {
-            $("#sensorTable").dataTable().fnClearTable();
+                $("#sensorTable").dataTable().fnClearTable();
 
             },
             error: function () {
-                 $("#sensorTable").dataTable().fnClearTable();
+                $("#sensorTable").dataTable().fnClearTable();
             }
         });
     });
@@ -554,7 +570,7 @@ $(document).ready(function () {
 
         $.ajax({
             "url": hostname + "stations/all",
-            //"url": "http://127.0.0.1:8081/data/table.json",
+           // "url": "http://127.0.0.1:8081/data/table.json",
             dataType: 'json',
             success: function (data) {
 
