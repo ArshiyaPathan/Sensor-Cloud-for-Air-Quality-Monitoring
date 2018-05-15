@@ -404,7 +404,7 @@ $(document).ready(function () {
         });
 
         // Handle click on "View" button
-        $('#stationTable tbody').on('click', '.btn-view', function (e) {
+        $('#stationTable tbody').off( 'click' ).on('click', '.btn-view', function (e) {
             var data = station.row($(this).parents('tr')).data();
             loadSensorTable(data[0]);
 
@@ -412,7 +412,7 @@ $(document).ready(function () {
 
 
         // Handle click on "Delete" button
-        $('#stationTable tbody').on('click', '.btn-delete', function (e) {
+        $('#stationTable tbody').off( 'click' ).on('click', '.btn-delete', function (e) {
             var data = station.row($(this).parents('tr')).data();
             $.ajax({
                 //url: 'http://127.0.0.1:8081/station/' + data[0],
