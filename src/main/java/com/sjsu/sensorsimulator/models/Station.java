@@ -29,7 +29,6 @@ public class Station {
     }
 
 
-
     public Double getLatitude() {
         return latitude;
     }

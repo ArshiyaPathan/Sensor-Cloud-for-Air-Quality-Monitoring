@@ -10,17 +10,10 @@ public class SensorData {
 
     @Id
     private String entryNo;
-    //@ManyToOne(cascade= CascadeType.ALL)
-    //@JoinColumn(name = "sensor_id")
-    //private Sensor sensor;
     private String sensorId;
-
-    // @Temporal(TemporalType.TIMESTAMP)
-    //@Column(name = "date", columnDefinition = "DATETIME")
     private Date date;
     private String AQI;
     private String unitOfMeasurement;
-
 
     public String getEntryNo() {
         return entryNo;
@@ -28,14 +21,6 @@ public class SensorData {
 
     public void setEntryNo(String entryNo) {
         this.entryNo = entryNo;
-    }
-
-    public String getSensorId() {
-        return sensorId;
-    }
-
-    public void setSensorId(String sensorId) {
-        this.sensorId = sensorId;
     }
 
     public Date getDate() {
@@ -46,6 +31,14 @@ public class SensorData {
         this.date = date;
     }
 
+    public String getAQI() {
+        return AQI;
+    }
+
+    public void setAQI(String AQI) {
+        this.AQI = AQI;
+    }
+
     public String getUnitOfMeasurement() {
         return unitOfMeasurement;
     }
@@ -54,11 +47,11 @@ public class SensorData {
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public String getAQI() {
-        return AQI;
+    public String getSensorId() {
+        return sensorId;
     }
 
-    public void setAQI(String AQI) {
-        this.AQI = AQI;
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId;
     }
 }
