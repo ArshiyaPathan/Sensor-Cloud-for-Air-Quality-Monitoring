@@ -5,25 +5,26 @@ import com.sjsu.sensorsimulator.models.SensorData;
 import com.sjsu.sensorsimulator.models.Station;
 import com.sjsu.sensorsimulator.models.sensors.AddSensorRequest;
 import com.sjsu.sensorsimulator.models.sensors.Sensor;
-import com.sjsu.sensorsimulator.models.sensors.SensorType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 @Component
 public class StationDataProvider {
-   // private Session session;
+    // private Session session;
     private final StationRepository stationRepository;
     private final SensorRepository sensorRepository;
+    private final SensorDataRepository sensorDataRepository;
 
     @Autowired
-    public StationDataProvider(StationRepository stationRepository, SensorRepository sensorRepository) {
+    public StationDataProvider(StationRepository stationRepository, SensorRepository sensorRepository, SensorDataRepository sensorDataRepository) {
         this.stationRepository = stationRepository;
         this.sensorRepository = sensorRepository;
-       // Criteria cr = session.createCriteria(SensorData.class);
+        this.sensorDataRepository = sensorDataRepository;
     }
     //get all stations
     public List<Station> getStations(){
@@ -45,14 +46,14 @@ public class StationDataProvider {
     public Sensor getSensorById(String id) {
         Optional<Sensor> sensor = sensorRepository.findById(id);
         //if (sensor == null) {
-            //throw new ResourceNotFoundException(id, "user not found");
+        //throw new ResourceNotFoundException(id, "user not found");
         //}
         return sensor.orElse(null);
     }
 
     //add station
     public void addStation(Station stationRequest){
-        //Station station= new Station();
+
         stationRepository.save(stationRequest);
     }
 
@@ -73,8 +74,8 @@ public class StationDataProvider {
             if(sensors.get(i).getSensorId()== sensorid)
                 sensors.remove(sensors.get(i));
         }
-                //.remove(SensorProvider.deleteSensor(sensorid)));
-       stationRepository.save(station);
+        //.remove(SensorProvider.deleteSensor(sensorid)));
+        stationRepository.save(station);
     }
 
     //delete sensor by id
@@ -85,7 +86,7 @@ public class StationDataProvider {
     //delete station
     public void deleteStation(String id){
         stationRepository.delete(getStation(id));
-       // stationRepository.deleteById();
+        // stationRepository.deleteById();
     }
 
     //update station by changing sensor status
@@ -122,5 +123,14 @@ public class StationDataProvider {
         sensorRepository.save(sensor);
     }
 
+    public void addSensorDataValues(SensorData dataReq){
+        //Station station= new Station();
+        sensorDataRepository.save(dataReq);
+    }
 
+    public List<SensorData> getSensorDataValues(String id, Date startDate, Date endDate) {
+        List<SensorData> data = (List<SensorData>)sensorDataRepository.getSensorDataByDate(id,startDate,endDate);
+        return data;
+    }
 }
+
