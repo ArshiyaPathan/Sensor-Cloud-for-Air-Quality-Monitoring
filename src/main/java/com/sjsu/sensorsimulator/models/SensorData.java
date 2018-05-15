@@ -10,12 +10,17 @@ public class SensorData {
 
     @Id
     private String entryNo;
-    @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name = "sensor_id")
-    private Sensor sensor;
+    //@ManyToOne(cascade= CascadeType.ALL)
+    //@JoinColumn(name = "sensor_id")
+    //private Sensor sensor;
+    private String sensorId;
+
+    // @Temporal(TemporalType.TIMESTAMP)
+    //@Column(name = "date", columnDefinition = "DATETIME")
     private Date date;
-    private String unitOfMeasurement;
     private String AQI;
+    private String unitOfMeasurement;
+
 
     public String getEntryNo() {
         return entryNo;
@@ -25,12 +30,12 @@ public class SensorData {
         this.entryNo = entryNo;
     }
 
-    public Sensor getSensor() {
-        return sensor;
+    public String getSensorId() {
+        return sensorId;
     }
 
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId;
     }
 
     public Date getDate() {
