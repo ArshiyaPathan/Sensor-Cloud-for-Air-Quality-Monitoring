@@ -8,6 +8,7 @@ $(document).ready(function () {
 
 
     $('#adminOperationLink').click(function (e) {
+        if ($.session.get("admin")){
         $("#mainAdmin").delay(100).fadeIn(100);
         $("#sensorTable").fadeOut(100);
         $("#adminMenu").delay(100).fadeIn(100);
@@ -16,7 +17,12 @@ $(document).ready(function () {
         $("#reportingMenu").fadeOut(100);
         loadStationTable();
         $(this).addClass('active');
+        }
+        else{
+        window.location.replace(hostname +"login.html");
+        }
         e.preventDefault();
+            
     });
 
     $('#dashboardLink').click(function (e) {
@@ -196,30 +202,31 @@ $(document).ready(function () {
     function reloadTableAndGraphData() {
         var timeRange = $("#timeRange").val();
         var period = $("#peiodHidden").val();
-        var startParts = timeRange.split(' – ')[0];
+        var startParts = timeRange.split(' – ')[0].split('/');
         // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
         // January - 0, February - 1, etc.
-        var startDate = new Date(startParts);
-        console.log(startDate.toDateString());
+        var startDate =startParts[2]+"-"+startParts[0]+"-"+ startParts[1];
+         //console.log(startDate.toDateString());
 
-        var endParts = timeRange.split(' – ')[1];
+        var endParts = timeRange.split(' – ')[1].split('/');
         // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
         // January - 0, February - 1, etc.
-        var endDate = new Date(endParts);
-        console.log(endDate.toDateString());
+        var endDate = endParts[2]+"-"+endParts[0]+"-"+ endParts[1];
+       // console.log(endDate.toDateString());
 
         var startDateTimeStamp = new Date(startDate).getTime();
         var endDateTimeStamp = new Date(endDate).getTime();
         var citySelected = $("#cityselector").val();
-        var urlPart = "?period=" + period + "&" + "city=" + citySelected + "&" + "start=" + startDateTimeStamp + "&" + "end=" + endDateTimeStamp
-
+       // http://localhost:8080/sensordata/{sensorID}?startDate=2017-01-01&endDate=2017-01-10
+        var urlPart =  "sensordata/" + $("#sensorselector").val()+"?"+"startDate="+startDate+"&"+"endDate="+endDate ;
         var baseURl = hostname
         $.ajax({
-            //url: baseURl + "table" + urlPart,
-            url: hostname + "data.json",
+            url: baseURl + urlPart,
+            //url: hostname + "data.json",
 
             dataType: 'json',
             success: function (data) {
+
                 //alert('done');
                 $('#clienti').bootstrapTable({
                     data: data
@@ -647,5 +654,6 @@ $(document).ready(function () {
 
 
 });
+
 
 
