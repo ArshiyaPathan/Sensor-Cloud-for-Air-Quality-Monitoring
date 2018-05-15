@@ -6,9 +6,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Dashboard</title>
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/switchery.min.css">
-	<link rel="stylesheet" href="css/base.css">
+	<link rel="stylesheet" href="bootstrap.css">
+	<link rel="stylesheet" href="switchery.min.css">
+	<link rel="stylesheet" href="base.css">
 	<style>
 		.perfect-centering {
 			position: absolute;
@@ -68,7 +68,7 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
-								<form id="login-form" action="http://127.0.0.1:8081/login" method="post" role="form" style="display: block;">
+								<form id="login-form"  role="form" style="display: block;">
 									<div class="form-group">
 										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value=""required>
 									</div>
@@ -90,13 +90,13 @@
 								</form>
 								<form id="register-form" action="http://127.0.0.1:8081/register" method="post" role="form" style="display: none;">
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value=""required>
+										<input type="text" name="username2" id="username2" tabindex="1" class="form-control" placeholder="Username" value=""required>
 									</div>
 									<div class="form-group">
 										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value=""required>
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"required>
+										<input type="password" name="password2" id="password2" tabindex="2" class="form-control" placeholder="Password"required>
 									</div>
 									<div class="form-group">
 										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
@@ -117,21 +117,23 @@
 		</div>
 
 	</div>
-	<script src="js/jquery-1.11.3.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery.easypiechart.min.js"></script>
+	<script src="jquery-1.11.3.js"></script>
+	<script src="bootstrap.js"></script>
+	<script src="jquery.easypiechart.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/highcharts-more.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/modules/export-data.js"></script>
-	<script src="js/switchery.min.js"></script>
+	<script src="switchery.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu5nZKbeK-WHQ70oqOWo-_4VmwOwKP9YQ"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery.session@1.0.0/jquery.session.js"></script>
 	<!-- Bootstrap 4 CDN JS -->
 	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js" integrity="sha256-+h0g0j7qusP72OZaLPCSZ5wjZLnoUUicoxbvrl14WxM= sha512-0z9zJIjxQaDVzlysxlaqkZ8L9jh8jZ2d54F3Dn36Y0a8C6eI/RFOME/tLCFJ42hfOxdclfa29lPSNCmX5ekxnw==" crossorigin="anonymous"></script> -->
 
-	<script src="js/login.js"></script>
+	<script src="login.js"></script>
 </body>
 
 </html>
+
