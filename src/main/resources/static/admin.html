@@ -78,10 +78,10 @@
 
               <label for="sensorselector" style="color:#FFF;">Select Sensor</label>
               <select class="form-control  " id="sensorselector">
-                     <option>CO</option>
-                     <option>NO2</option>
-                     <option>SO2</option>
-                     <option>Ozone</option>
+                     <option value="57869774">CO</option>
+                     <option value="67463884">NO2</option>
+                     <option value="10004565">SO2</option>
+                     <option value="23478969">Ozone</option>
                      
                   </select>
 
@@ -209,16 +209,11 @@
           <thead>
             <tr>
               <th data-field="No">Number</th>
-              <th data-field="Date">Date</th>
-              <th data-field="AQS_SITE_ID">AQS_SITE_ID</th>
-              <th data-field="POC">POC</th>
-              <th data-field="Daily Max 8 hr oz">Daily Max 8 hr oz</th>
-              <th data-field="Units">Units</th>
-              <th data-field="Daily_AQS_Value">Daily_AQS_Value</th>
-              <th data-field="Daily_OBS_Count">Daily_OBS_Count</th>
-              <th data-field="Station Name">Station Name</th>
-              <th data-field="State">State</th>
-            </tr>
+              <th data-field="date">Date</th>
+              <th data-field="sensorId">Sensor Id</th>
+              <th data-field="unitOfMeasurement">UnitOf Measurement</th>
+              <th data-field="aqi">Aqi</th>
+              </tr>
           </thead>
         </table>
       </div>
@@ -243,6 +238,7 @@
   <script src="https://rawgit.com/wenzhixin/bootstrap-table/develop/src/extensions/export/bootstrap-table-export.js"></script>
   <script src="https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery.session@1.0.0/jquery.session.js"></script>
 
 
   <!-- Bootstrap 4 CDN JS -->
