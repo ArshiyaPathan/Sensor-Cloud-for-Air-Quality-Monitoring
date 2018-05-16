@@ -3,24 +3,24 @@ package com.sjsu.sensorsimulator.models;
 import javax.persistence.*;
 import java.util.Date;
 
-import com.sjsu.sensorsimulator.models.sensors.Sensor;
 
 @Entity
 public class SensorData {
 
     @Id
-    private String entryNo;
+    @Column(name = "no")
+    private String no;
     private String sensorId;
     private Date date;
     private String AQI;
     private String unitOfMeasurement;
 
-    public String getEntryNo() {
-        return entryNo;
+    public String getNo() {
+        return no;
     }
 
-    public void setEntryNo(String entryNo) {
-        this.entryNo = entryNo;
+    public void setNo(String no) {
+        this.no = no;
     }
 
     public Date getDate() {
